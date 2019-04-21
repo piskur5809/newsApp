@@ -1,26 +1,36 @@
 import React, {Component} from 'react';
+
+import {connect} from 'react-redux';
+import * as actions from '../../actions';
+
 import './search-panel.css';
 
-export default class SearchPanel extends Component{
+class SearchPanel extends Component{
 
-    state = {
-        search: ""
-    };
+    
 
     onSearchChange = (ev)=>{
-        const {onSearch = () => {}} = this.props;
-        this.setState({search: ev.target.value});
-        onSearch(ev.target.value);
+        const {searchNews} = this.props
+        const val = ev.target.value
+        searchNews(val)
     };
-   
+    
     render(){
         return(
             <div className="header-search">
             <input type="text" 
                    placeholder="Search" 
-                   value={this.state.search} 
-                   onChange={this.onSearchChange}/>
+                   onChange={this.onSearchChange}
+                   />
             </div>
         );
     };
 }
+
+const mapStateToProps = (search) => {
+    return {
+       state: search
+    };
+};
+    
+export default connect(mapStateToProps, actions)(SearchPanel);

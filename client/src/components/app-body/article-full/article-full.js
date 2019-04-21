@@ -1,37 +1,63 @@
-import React from 'react';
-import './article-full.css'
+import React, {Component} from 'react';
 
-const  ArticleFull = ({visibleItems,  onHideArticle, onLikes }) =>{
-    let id = 0;
-    let nArr = []
-    visibleItems.forEach((elem)=>{
-        if(elem.show === true){
-            id = elem.id
-            nArr.push(elem)
+import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
+
+import * as actions from '../../../actions';
+// import { fetchPosts} from '../../../actions/actions';
+import Spiner from '../../spiner';
+
+import './article-full.css';
+
+class  ArticleFull extends Component{
+    
+    // componentDidMount(){
+    //     fetchPosts();
+    // }
+
+    render(){
+
+        const {itemId, state, likeNews} = this.props;
+    
+        if(state.loaded){
+            return (<Spiner/>);
         }
-        
-    })
-    const {title, description, content, urlToImage, author, views, likes} = nArr[0];
-    return (
-        <div className ="article-full-wraper bg-dark" >
-            <div className="article-full-back" onClick={()=>onHideArticle(id)}></div>
-            <div className="article-full bg-white ">
-                <button type ="button" className ="close" onClick={()=>onHideArticle(id)}>&times;</button>
-                <div className ="article-footer-img"><img src = {urlToImage} alt=""></img></div>
-                <div className ="article-title-full text-warning">{title}</div>
-                <div className ="article-description-full text-success">{description}</div>
-                <div className ="article-content">{content}</div>
-                
-                <div className ="article-footer d-flex">
-                    <div className ="article-footer-author">{author}</div>
-                    <div className ="article-footer-views">Views: {views}</div>
-                    <div className ="article-footer-likes">
-                    <button type="button" className="likes-button" onClick={()=>onLikes(id)}>some button</button>
-                    likes: {likes}</div>
-                </div>
-            </div>
-        </div>
-    );
-};
 
-export default ArticleFull;
+        const article = state.articles.map((element, index) => {
+        
+        if(index === Number(itemId)){
+            return (
+                <div key={index} className ="article" >
+                        <Link to='/' className="article-close">
+                            <button type ="button" className ="article-close" >&times;</button>
+                        </Link>
+                    <div className="article-content">
+                        <div className ="article-content-title">{element.title}</div>
+                        <div className ="article-content-img"><img src = {element.urlToImage} alt=""></img></div>
+                        <div className ="article-content-description">{element.description}</div>
+                        <div className ="article-content-news">{element.content}</div>
+                        <div className ="article-content-author">{element.author}</div>
+                        <div className ="article-content-footer">
+                            <div className ="article-footer-views"><p>Views: {element.views}</p></div>
+                            <button type="button" className="article-footer-likes-button" onClick={likeNews.bind(this, index)}>
+                                <i className="fa fa-heart" aria-hidden="true"></i>
+                                <p>likes: {element.likes}</p>
+                            </button>
+                        </div>
+                    </div>
+                </div> 
+            );
+        };
+        return null;
+        });
+        return article;
+    }
+}
+
+const mapStateToProps = (articles) => {
+    return {
+       state: articles
+    };
+};
+    
+export default connect(mapStateToProps, actions)(ArticleFull);

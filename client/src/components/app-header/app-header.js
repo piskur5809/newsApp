@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import ToDay from '../../services/date';
 import SearchPanel from '../searh-panel';
-
+import {Link} from 'react-router-dom'
 import "./app-header.css"
 
 
@@ -9,23 +9,22 @@ export default class AppHeader extends Component{
 
     appDate = ()=>{
         const toDay = new ToDay();
-        return (<div className = "header-date h4 text-light">
+        return (<div className = "header-date">
                 <span>{toDay.renderDate()}</span>
                 </div>);
     };
         
-    title = ()=>{
-        return (<div className="header-title text-white display-4">"News App"</div>)
-    };
+
     
     render(){
-        const {onSearch}=this.props;
-        return (<div className ="header-wraper bg-primary ">
-                    <div className="head d-flex justify-content-between align-items-center ">
+        // const {onSearch}=this.props;
+        return (
+            
+                <div className ="header wraper">
+                    <div className="header-content">
                         {this.appDate()}
-                        {this.title()}
-                        <SearchPanel 
-                            onSearch ={onSearch}/>
+                        <Link to="/"><div className="header-title">"News App"</div></Link>
+                        <SearchPanel/>
                     </div>
                 </div>);
     };

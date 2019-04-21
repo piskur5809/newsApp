@@ -1,14 +1,70 @@
 .h1{
     margin:0;
 }
-.article{
+.articles{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #ffffffd9;
     width:49%;
-   
-}
-.article-title{
-    padding: 5px 5px 5px 20px;
+    border-radius: 10px;
+    /* opacity: 0.8;  */
 }
 
-.article-footer-img img{
-    width:200px;
+.articles-title{
+    padding: 10px 5px 10px 20px;
+    font-size: 25px;
+    font-weight: 600;
 }
+
+.articles-content{
+    padding:0 5px 0 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.articles-content-img img{
+    width:200px;   
+}
+
+.articles-content-description{
+    color: #000000;
+    padding: 0 0 0 10px;
+
+}
+.articles-show-button{
+    border: none;
+    background-color: transparent;
+    color: blue;
+    padding: 0 0 0 20px;
+}
+
+.articles-footer{
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding: 0 10px 0 0 ;
+}
+
+.articles-footer-views{
+    margin-right: 20px;
+}
+
+
+.articles-footer-likes-button{
+    display: flex;
+    font-size: 16px;
+    padding: 0;
+    border: none;
+    background-color: transparent;
+}
+.articles-footer-likes-button:focus{
+    outline: none;
+}
+
+.fa{
+    margin-right: 4px;
+    color: red;
+}
+

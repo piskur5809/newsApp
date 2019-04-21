@@ -1,45 +1,78 @@
-import React from 'react';
-import './articles.css'
+import React, {Component} from 'react';
+
+import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
+
+import * as actions from '../../../actions';
+import { fetchPosts} from '../../../actions/actions';
+
+import Spiner from '../../spiner';
+
+import './articles.css';
 
 
+class Articles extends Component {
 
-const  Articles = ({visibleItems, onLikes, onShowArticle}) =>{
-    if(!visibleItems.length){
-        return (<div>Nothing Found!</div>)
-    }
-    const articles = visibleItems.map((elem)=>{
-        
-        let img = null;
-        const id = elem.id
-        if(elem.urlToImage){
-            img =<img src = {elem.urlToImage} alt=""></img>;
-        }
-        if(elem.content == null){
-            elem.content = <a href={elem.url}>{elem.url}</a>;
-         };
+    // componentDidMount(){   // it's a true variant!! then fetching on server
+        // fetchPosts();
+    // }
+     
+    render(){
 
+        const {state, likeNews, viewNews} = this.props;
 
-        return ( 
-        <div key={id} className ="article border border-primary d-flex flex-column align-item-between">
-            <div className ="article-title"><p className =" h1 text-primary font-weight-bold ">{elem.title}</p></div>
-            <div className ="article-description text-success">{elem.description}</div>
-            <div className ="article-content">{elem.content}</div>
-            <button type ="button" className ="article-show-content" onClick={()=>onShowArticle(id)}>more>>></button>
-            <div className ="article-footer d-flex">
-                <div className ="article-footer-img">{img}</div>
-                <div className ="article-footer-author">{elem.author}</div>
-                <div className ="article-footer-views">Views: {elem.views}</div>
-                <div className ="article-footer-likes">
-                <button type="button" className="likes-button" onClick={()=>onLikes(id)}>some button</button>
-                likes: {elem.likes}</div>
-            </div>
-        </div>
-        );
-    });
+        if(state.loaded){
+            return (<Spiner/>);
+        };
 
-    return ( 
-       [articles]
-    );
+        console.log(state,"   articles.js")
+
+        const article =  state.articles.map((elem, index) => {
+
+            let img = null;
+
+            if(elem.urlToImage){
+                img =<img src = {elem.urlToImage} alt=""></img>;
+            };
+
+            const artic = 
+                <div key={elem.id} className ="articles">
+                    <div className ="articles-title"><p>{elem.title}</p></div>
+                    <div className="articles-content">
+                        <div className ="articles-content-img">{img}</div>
+                        <div className ="articles-content-description">{elem.description}</div> 
+                    </div>
+                     <Link to={`article/${index}`}> <button type ="button" className ="articles-show-button" onClick={viewNews.bind(this, index)}>more>>></button></Link>
+                    <div className ="articles-footer">
+                        <div className ="articles-footer-views"><p>Views: {elem.views}</p></div>
+                        <button type="button" className="articles-footer-likes-button" onClick={likeNews.bind(this, index)}>
+                            <i className="fa fa-heart" aria-hidden="true"></i>
+                            <p>likes: {elem.likes}</p>
+                        </button>
+                    </div>
+                </div>
+            
+
+            if(elem.title && elem.title.toLowerCase().indexOf(state.search.toLowerCase()) > -1){
+                return artic;
+            }else if (elem.description && elem.description.toLowerCase().indexOf(state.search.toLowerCase()) > -1){
+                return artic;
+            }else if (elem.content && elem.content.toLowerCase().indexOf(state.search.toLowerCase()) > -1){
+                return artic;
+            }
+            return null;
+        });
+
+    return ( [article] );
+    };
 };
 
-export default Articles;
+fetchPosts(); // change it it's a bad practic!!!
+
+const mapStateToProps = (articles) => {
+    return {
+       state: articles
+    };
+};
+
+export default connect(mapStateToProps, actions)(Articles);
