@@ -1,0 +1,18 @@
+.main-wraper{
+    width:100%;
+    background-image: url(../../images/newspaper16001.jpg);
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.main{
+    max-width:1170px;
+    margin: 0 auto;
+    padding: 20px 0 20px 0;
+    
+}
+.article{
+    background-color: white;
+    margin-top: 20px
+}

@@ -1,0 +1,14 @@
+.header-wraper{
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+.head{
+    max-width: 1170px;
+    height: 80px;
+    margin: 0 auto;
+}
+.header-date{
+    margin:0;
+}
