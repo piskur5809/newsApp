@@ -28,6 +28,7 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
+
 body {
 	line-height: 1;
 }
@@ -49,9 +50,19 @@ table {
 a {
     text-decoration: none;
 } 
+/* CSS Reset end */
+
+html{
+    height: 100%;
+}
 
 body{
+    height:100%;
     font-family: sans-serif;
+}
+
+#root{
+    height: 100%;
 }
 
 .wraper{
@@ -59,6 +70,7 @@ body{
 }
 
 .main{
+   min-height: calc( 100% - 140px );
     width:100%;
     background-image: url(../../images/newspaper16001.jpg);
     background-attachment: fixed;
@@ -66,7 +78,14 @@ body{
     background-repeat: no-repeat;
 }
 
+@media screen and (min-width:100px) and (max-width:625px) {
+    .main-content{
+        flex-direction: column;
+    }
+}
+
 .main-content{
+    min-height:100%;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;

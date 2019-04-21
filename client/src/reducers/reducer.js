@@ -1,36 +1,40 @@
-const initialState = {articles: [
-                        //     {
-                        //     id: 2,
-                        //     author: "Ann Schmidt",
-                        //     title: "Stuffed sandwiches recalled over possible plastic contamination, officials announce - Fox News",
-                        //     description: "Approximately 56,578 pounds of stuffed sandwiches have been recalled because they are reportedly contaminated by semi-transparent plastic, according to the Food Safety and Inspection Service (FSIS).",
-                        //     content: "Approximately 56,578 pounds of stuffed sandwiches have been recalled because they are reportedly contaminated by semi-transparent plastic, according to the Food Safety and Inspection Service (FSIS). The recall was announced Friday, two days after the FSIS was… [+988 chars]",
-                        //     urlToImage: "https://static.foxnews.com/foxnews.com/content/uploads/2019/04/Bremmer-Pepperoni-Pizza.jpg",
-                        //     views: 0,
-                        //     likes: 0,
-                        //     showOnce: false,
-                        // }
-                        ],
-                    search: "",
-                    loaded: true,
-};
-
-function reducer (state = initialState, action){
+function reducer (state , action){
 
     switch(action.type){
         case 'ADD_NEWS':
         return {...state, articles: action.payload, loaded: action.loaded};
 
+        case 'LOAD_NEWS':
+        return {...state, articles: action.payload}
+
         case 'LIKE_NEWS':
-            state.articles[action.payload].likes ++;
-        return {...state, articles: state.articles};
+           const likeElem = state.articles.map((item) => {
+               if(item._id === action.id){
+                   item.likes = action.likes
+                   item.userIpLikes = action.ip
+               }
+               return item
+           });
+        return {...state, articles: likeElem}; 
 
         case 'VIEW_NEWS':
-            state.articles[action.payload].views ++;
-        return {...state, articles: state.articles};
+        const viewElem = state.articles.map((item) => {
+            if(item._id === action.id){
+                item.views = action.views
+                item.userIpViews = action.ip
+            }
+            return item
+        });
+     return {...state, articles: viewElem};
 
         case 'SEARCH_NEWS':
         return{...state, search: action.payload};
+
+        case 'ITEMS_LOADED':
+        return {...state, loaded:true}
+
+        case 'ADD_VISITOR':
+        return {...state, visitors: action.payload} 
 
         default:
         return state;

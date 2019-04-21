@@ -1,3 +1,3 @@
-import {addNews, viewNews, likeNews, searchNews} from './actions';
+import {addNews, viewNews, likeNews, searchNews, addVisitor} from './actions';
 
-export {addNews, viewNews, likeNews, searchNews};
+export {addNews, viewNews, likeNews, searchNews, addVisitor};

@@ -1,14 +1,17 @@
+@media screen and (min-width:100px) and (max-width:480px) {
+    .article-content-img img {
+        width: 100% !important;   
+    }
+}
+
 .article{
     max-width: 1170px;
     background-color: #ffffffd9;
     margin: 10px auto 0 auto;
-    
-    
     margin:  0 auto;
     display: flex;
     flex-direction: column;
     overflow: auto;
-    
 }
 
 .article-close{
@@ -16,13 +19,12 @@
     font-size:30px;
     border: none;
     background-color: transparent;    
+    cursor: pointer;
 }
 
 .article-content{
     padding:0 20px 10px 20px ;
 }
-
-
 
 .article-content-title{
     font-size: 40px;
@@ -71,6 +73,7 @@
     padding: 0;
     border: none;
     background-color: transparent;
+    cursor: pointer;
 }
 
 .article-footer-likes-button:focus{

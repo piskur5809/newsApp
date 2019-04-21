@@ -1,23 +1,54 @@
-
 const express = require('express');
 const router = express.Router();
 
-//item model
-const Item = require('../../models/Item');
+//Item Model
+const Article = require('../../models/Item');
 
-router.get('/', (req, res)=>{
-    // console.log(Item.find().sort(),"Item")
-    Item.find()
-        .sort({date: -1})
-        .then(items=> res.json(items));
-    });
-        
+// получаем новости на страницу 
+router.get('/',(req, res) => {
+    Article.find()
+    .then(items => res.json(items));  
+});
 
-//route Post api/items
+// запись просмотров и лайков 
+// если честно не смог разделить посты с лайками и просмотрами, поэтому сделал проверку запроса внутри
+router.post('/:id', (req, res) => {
+   
+    // проверка лайков
+   if(req.body.likes) {
+   
+        let addLikes = req.body.elem.likes;
+        let addIp = req.body.elem.userIpLikes;
+            // проверка на наличие IP в базе
+        if(!addIp.includes(req.ip)){
+            addLikes++;
+            addIp.push(req.ip);
+            // если IP не существует обновляем базу
+            Article.findOneAndUpdate({_id:req.params.id}, {likes: addLikes, userIpLikes: addIp }, {new: true}, (err, item)=>{
+            if(err){
+                console.log(err);
+            }
+        }).then(items => res.json(items));
+        };   
+    };
+    // проверка просмотров
+    if(req.body.views){
 
-router.post('/', (req, res)=>{
-    
-    console.log(res.data)
-})
-    
+        let addViews = req.body.elem.views;
+        let addIp = req.body.elem.userIpViews;
+        // проверка на наличие IP в базе
+        if(!addIp.includes(req.ip)){
+            addViews++;
+            addIp.push(req.ip);
+            // если IP не существует обновляем базу
+            Article.findOneAndUpdate({_id:req.params.id}, {views: addViews, userIpViews: addIp }, {new: true}, (err, item)=>{
+                if(err){
+                    console.log(err);
+                }
+            }).then(items => res.json(items));
+        };     
+    };
+
+});
+
 module.exports = router;

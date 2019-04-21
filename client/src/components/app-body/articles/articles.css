@@ -1,3 +1,20 @@
+
+@media screen and (min-width:100px) and (max-width:768px) {
+    .articles{
+        width:100% !important;   
+    }
+    .articles-content{
+        display: block !important;
+    }
+    .articles-content-img {
+        display: flex;
+        align-items: center;
+    }
+    .articles-content-img img {
+        margin: auto;
+    }
+}
+
 .h1{
     margin:0;
 }
@@ -9,7 +26,6 @@
     background-color: #ffffffd9;
     width:49%;
     border-radius: 10px;
-    /* opacity: 0.8;  */
 }
 
 .articles-title{
@@ -31,13 +47,18 @@
 .articles-content-description{
     color: #000000;
     padding: 0 0 0 10px;
-
 }
+
+.articles-show{
+    width: 80px;
+}
+
 .articles-show-button{
     border: none;
     background-color: transparent;
     color: blue;
     padding: 0 0 0 20px;
+    cursor: pointer;
 }
 
 .articles-footer{
@@ -58,7 +79,9 @@
     padding: 0;
     border: none;
     background-color: transparent;
+    cursor: pointer;
 }
+
 .articles-footer-likes-button:focus{
     outline: none;
 }
@@ -67,4 +90,3 @@
     margin-right: 4px;
     color: red;
 }
-

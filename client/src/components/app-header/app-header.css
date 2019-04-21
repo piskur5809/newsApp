@@ -1,3 +1,17 @@
+@media screen and (min-width:100px) and (max-width:625px) {
+    .header-content{
+        justify-content: space-around !important;
+        flex-wrap: wrap;
+        height: 100px !important;
+        padding: 15px 0;
+    }
+    .header-date{
+        font-size: 20px !important;
+    }
+    .header-title {
+        font-size: 30px !important;
+    }
+}
 
 .header{
     position: sticky;
@@ -20,14 +34,10 @@
     margin:0;
     color:#ffffff;
     font-size: 25px;
-    
 }
-
 
 .header-title {
     color: #ffffff;
     font-size: 50px;
     font-weight: 600;
 }
-
-

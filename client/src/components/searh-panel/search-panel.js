@@ -3,16 +3,12 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import * as actions from '../../actions';
 
-import './search-panel.css';
-
 class SearchPanel extends Component{
 
-    
-
     onSearchChange = (ev)=>{
-        const {searchNews} = this.props
-        const val = ev.target.value
-        searchNews(val)
+        const {searchNews} = this.props;
+        const val = ev.target.value;
+        searchNews(val);
     };
     
     render(){

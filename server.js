@@ -1,26 +1,47 @@
-const express = require('express'); 
+const express = require('express');
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
+const path = require('path');
 
-const items = require('./routes/api/items');
+const News = require('./requires/newsRequire');
+const Visitors = require('./requires/visitorsRequire');
 
 const app = express();
 
-//Bodyparser
-app.use(bodyParser.json());
+//Express Middleware
+app.use(express.json());
 
 //DB config
 const db = require('./config/keys').mongoURI;
 
-//Connect to mongo
+// Connect to Mongo
 mongoose
-    .connect(db,{ useNewUrlParser: true })
-    .then(()=> console.log('mongo conected'))
-    .catch(err=>console.log(err));
+    .connect(db, { useNewUrlParser: true, useCreateIndex: true})
+    .then(() => console.log('MongoDB conected...'))
+    .catch(err => console.log(err));
+ 
+//Use Routes   
+app.use('/api/articles', require('./routes/api/items'));   
+app.use('/api/visitors', require('./routes/api/visitors'));
 
-// use routes
-app.use('/api/items', items);
+// Serve static assets if in production
+if (process.env.NODE_ENV === 'production') {
+    // Set static folder
+    app.use(express.static('client/build'));
+  
+    app.get('*', (req, res) => {
+      
+      res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+    });
+  }
 
-    const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5000;
 
-    app.listen(port, ()=>console.log(port,'server'));
+app.listen(port, () => console.log(`Server started on port ${port}`));
+
+// Refresh news
+News.deleteNews();
+News.addNews();
+
+// Refresh visitors today 
+Visitors.deleteVisitors(); 
+Visitors.newVisitors();    

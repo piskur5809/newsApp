@@ -17,16 +17,15 @@ export default class App extends Component{
                 <AppHeader/>
                 <div className="main wraper">
                     <div className="main-content">
-                        
                         <Route path ="/"
                             component = {Articles}
-                            exact/>
+                            exact/> 
                     </div>
                     <Route path ="/article/:id" 
                             render ={ ({match})=> {
-                                    const {id} = match.params
-                                    return<ArticleFull itemId={id}/> 
-                        }}/>
+                                const {id} = match.params
+                                return<ArticleFull itemId={id}/> 
+                            }}/>
                 </div>
                 <Footer/>
             </Router> 

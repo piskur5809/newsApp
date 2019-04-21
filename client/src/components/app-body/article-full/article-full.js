@@ -4,32 +4,33 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 
 import * as actions from '../../../actions';
-// import { fetchPosts} from '../../../actions/actions';
 import Spiner from '../../spiner';
 
 import './article-full.css';
 
 class  ArticleFull extends Component{
     
-    // componentDidMount(){
-    //     fetchPosts();
-    // }
+    componentDidMount(){
+        const{addNews} = this.props;
+        addNews();
+    }
 
     render(){
 
         const {itemId, state, likeNews} = this.props;
-    
-        if(state.loaded){
-            return (<Spiner/>);
-        }
-
-        const article = state.articles.map((element, index) => {
         
-        if(index === Number(itemId)){
+        if(!state.loaded){
+            return (<Spiner/>);
+        };
+        // перебор state и создание статьи
+        const article = state.articles.map((element) => {
+        
+        if(element._id === itemId){
+
             return (
-                <div key={index} className ="article" >
+                <div key={element._id} className ="article" >
                         <Link to='/' className="article-close">
-                            <button type ="button" className ="article-close" >&times;</button>
+                            &times;
                         </Link>
                     <div className="article-content">
                         <div className ="article-content-title">{element.title}</div>
@@ -39,7 +40,7 @@ class  ArticleFull extends Component{
                         <div className ="article-content-author">{element.author}</div>
                         <div className ="article-content-footer">
                             <div className ="article-footer-views"><p>Views: {element.views}</p></div>
-                            <button type="button" className="article-footer-likes-button" onClick={likeNews.bind(this, index)}>
+                            <button type="button" className="article-footer-likes-button" onClick={likeNews.bind(this, element._id, element)}>
                                 <i className="fa fa-heart" aria-hidden="true"></i>
                                 <p>likes: {element.likes}</p>
                             </button>
@@ -51,8 +52,8 @@ class  ArticleFull extends Component{
         return null;
         });
         return article;
-    }
-}
+    };
+};
 
 const mapStateToProps = (articles) => {
     return {
