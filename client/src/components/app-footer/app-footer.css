@@ -1,0 +1,28 @@
+@media screen and (min-width:100px) and (max-width:480px) {
+    .footer-content{
+        flex-direction: column;
+        justify-content: space-around !important;
+    }
+}
+
+.footer{
+    background-color: #000000;
+    height: 60px;
+}
+
+.footer-content{
+    margin: 0 auto;
+    max-width: 1170px;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-contact{
+    color: #ffffff;
+}
+
+.footer-visitors{
+    color: #ffffff;
+}

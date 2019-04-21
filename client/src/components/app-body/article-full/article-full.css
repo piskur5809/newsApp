@@ -1,0 +1,81 @@
+@media screen and (min-width:100px) and (max-width:480px) {
+    .article-content-img img {
+        width: 100% !important;   
+    }
+}
+
+.article{
+    max-width: 1170px;
+    background-color: #ffffffd9;
+    margin: 10px auto 0 auto;
+    margin:  0 auto;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+}
+
+.article-close{
+    align-self: flex-end;
+    font-size:30px;
+    border: none;
+    background-color: transparent;    
+    cursor: pointer;
+}
+
+.article-content{
+    padding:0 20px 10px 20px ;
+}
+
+.article-content-title{
+    font-size: 40px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.article-content-img img{
+    width: 40%;
+    margin: 0 auto;
+    display: flex;
+    align-self: center;
+}
+
+.article-content-description{
+    padding-top: 10px;
+    font-size: 23px;
+}
+
+.article-content-news{
+    padding-top: 10px;
+    font-size: 17px;
+}
+
+.article-content-author{
+    padding: 10px 0 10px 0;
+    margin-right: 30px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.article-content-footer{
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding: 0 10px 0 0 ;
+}
+
+.article-footer-views{
+    margin-right: 20px;
+}
+
+.article-footer-likes-button{
+    display: flex;
+    font-size: 16px;
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.article-footer-likes-button:focus{
+    outline: none;
+}
