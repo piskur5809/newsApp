@@ -55,7 +55,7 @@ export const searchNews = (text) => ({type: 'SEARCH_NEWS', payload: text});
 // колличество посещений сайта принимается равным длинне массива IP адресов
 export  const  addVisitor = () => (dispatch) => {
     axios
-        .post('/api/visitors/')
+        .get('/api/visitors/')
         .then(res => {
             
             // если ответ c сервера пустой в store записывается пустой массив
@@ -72,6 +72,3 @@ export  const  addVisitor = () => (dispatch) => {
             });
         });
 };
-
-
-

@@ -12,3 +12,4 @@ NEWS APP
     а. Для запуска приложения " npm run dev ".
     b. Для запуска ТОЛЬКО клиентской части " cd client " " npm start ".
     с. Для запуска сервера " npm run server ".
+
