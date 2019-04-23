@@ -2,9 +2,6 @@ const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
 
-const News = require('./requires/newsRequire');
-const Visitors = require('./requires/visitorsRequire');
-
 const app = express();
 
 //Express Middleware
@@ -37,11 +34,3 @@ if (process.env.NODE_ENV === 'production') {
 const port = process.env.PORT || 5000;
 
 app.listen(port, () => console.log(`Server started on port ${port}`));
-
-// Refresh news
-News.deleteNews();
-News.addNews();
-
-// Refresh visitors today 
-Visitors.deleteVisitors(); 
-Visitors.newVisitors();    
