@@ -14,4 +14,4 @@ NEWS APP
     с. Для запуска сервера " npm run server ".
     
     
-Ссылка на готовый проект " https://dry-journey-88206.herokuapp.com/ "
+Ссылка на готовый проект "https://piskur5809-news-app.herokuapp.com/"
